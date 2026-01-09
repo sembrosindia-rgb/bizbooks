@@ -247,6 +247,7 @@ class SignUpSerializer(serializers.Serializer):
     password_confirm = serializers.CharField(write_only=True, min_length=8)
     organization_id = serializers.IntegerField()
     phone_number = serializers.CharField(max_length=20, required=False, allow_blank=True)
+    is_admin = serializers.BooleanField(required=False, default=False)
 
     def validate(self, data):
         if data.get('password') != data.get('password_confirm'):
@@ -271,29 +272,21 @@ class SignUpView(APIView):
         except Organization.DoesNotExist:
             return Response({'error': 'Organization not found'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Create user in pending state
+        # Create user as ACTIVE immediately (no verification)
         user = User(
             organization=org,
             email=data['email'],
             first_name=data['first_name'],
             last_name=data.get('last_name', ''),
             phone_number=data.get('phone_number', ''),
-            status='PENDING_VERIFICATION'
+            status='ACTIVE',
+            is_admin=bool(data.get('is_admin', False))
         )
         user.password_hash = make_password(data['password'])
         user.save()
 
-        # Generate a signed verification token (no DB required for skeleton)
-        signer = signing.TimestampSigner()
-        token = signer.sign(user.email)
-
-        # In a real implementation send email with verification link
-        verification_link = request.build_absolute_uri(f"/api/auth/verify/?token={token}")
-
         return Response({
-            'message': 'User created. Please verify your email to activate the account.',
-            'verification_link': verification_link,
-            'verification_token': token
+            'message': 'User created and activated. You can log in using the provided credentials.'
         }, status=status.HTTP_201_CREATED)
 
 
