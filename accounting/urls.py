@@ -18,7 +18,7 @@ from .user_views import (
     CustomFieldDefinitionViewSet, CustomFieldValueViewSet,
     CustomFormViewSet
 )
-from .user_views import SignUpView, VerifyEmailView
+from .user_views import SignUpView, VerifyEmailView, LoginView, LogoutView
 from .reporting_views import (
     DataImportViewSet, DataExportViewSet, FinancialReportViewSet,
     DashboardViewSet
@@ -77,6 +77,8 @@ urlpatterns = [
     path('', include(router.urls)),
     path('auth/signup/', SignUpView.as_view()),
     path('auth/verify/', VerifyEmailView.as_view()),
+    path('auth/login/', LoginView.as_view()),
+    path('auth/logout/', LogoutView.as_view()),
 ]
 
 

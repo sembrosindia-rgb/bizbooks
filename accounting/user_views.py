@@ -315,6 +315,43 @@ class VerifyEmailView(APIView):
         return Response({'message': 'Email verified. Account activated.'})
 
 
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+
+
+class LoginView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+
+        try:
+            user = User.objects.get(email=data['email'])
+        except User.DoesNotExist:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not check_password(data['password'], user.password_hash):
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # create session linkage
+        request.session['accounting_user_id'] = user.id
+        request.session.save()
+
+        return Response({'message': 'Login successful'})
+
+
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        request.session.pop('accounting_user_id', None)
+        request.session.save()
+        return Response({'message': 'Logged out'})
+
+
 class RoleViewSet(viewsets.ModelViewSet):
     """ViewSet for Role management"""
     permission_classes = [IsAuthenticated]
