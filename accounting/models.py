@@ -29,3 +29,15 @@ class TaxConfiguration(models.Model):
 class Party(models.Model):
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='parties')
     name = models.CharField(max_length=255)
+
+
+class User(models.Model):
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(blank=True, null=True)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.username
