@@ -99,8 +99,6 @@ def home_view(request):
             <h1>🏢 BizBooks</h1>
             <p>Welcome! Sign up to get started with your accounting backend.</p>
             {form_html}
-            <a href="/api/">API Docs</a>
-            <a href="/admin/">Admin</a>
         </div>
     </body>
     </html>
