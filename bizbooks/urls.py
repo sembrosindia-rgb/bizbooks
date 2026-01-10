@@ -22,10 +22,23 @@ def home_view(request):
     return HttpResponse("""
     <h1>BizBooks API</h1>
     <p>Welcome to the BizBooks accounting backend.</p>
+    <h2>Quick Links</h2>
     <ul>
-        <li><a href="/admin/">Admin</a></li>
-        <li><a href="/api/">API Root</a></li>
+        <li><a href="/admin/">Admin Panel</a></li>
+        <li><a href="/api/">API Root (Browsable)</a></li>
+        <li><a href="/api/organizations/">Organizations</a></li>
+        <li><a href="/api/parties/">Parties</a></li>
+        <li><a href="/api/tax-config/">Tax Configurations</a></li>
+        <li><a href="/api/plans/">Plans</a></li>
+        <li><a href="/api/subscriptions/">Subscriptions</a></li>
+        <li><a href="/api/global-settings/">Global Settings</a></li>
+        <li><a href="/api/audit-logs/">Audit Logs</a></li>
+        <li><a href="/api/roles/">Roles</a></li>
+        <li><a href="/api/permissions/">Permissions</a></li>
+        <li><a href="/api/user-roles/">User Roles</a></li>
+        <li><a href="/api/users/">Users</a></li>
     </ul>
+    <p>For API documentation, visit <a href="/api/">/api/</a> and explore the browsable interface.</p>
     """)
 
 urlpatterns = [
