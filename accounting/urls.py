@@ -11,13 +11,14 @@ from .views import (
     PurchaseOrderLineItemViewSet, CreditNoteViewSet, CreditNoteLineItemViewSet,
     DebitNoteViewSet, DebitNoteLineItemViewSet, DocumentSequenceViewSet,
     BankAccountViewSet, BankTransactionViewSet, BankReconciliationViewSet,
-    ExchangeRateViewSet, ForexGainLossViewSet, BankAPIConfigurationViewSet
+    ExchangeRateViewSet, ForexGainLossViewSet, BankAPIConfigurationViewSet,
+    SignUpView, VerifyEmailView, LoginView, LogoutView
 )
-from .user_views import (
-    UserViewSet, RoleViewSet, PermissionViewSet, UserAuditLogViewSet,
-    CustomFieldDefinitionViewSet, CustomFieldValueViewSet,
-    CustomFormViewSet
-)
+# from .user_views import (
+#     UserViewSet, RoleViewSet, PermissionViewSet, UserAuditLogViewSet,
+#     CustomFieldDefinitionViewSet, CustomFieldValueViewSet,
+#     CustomFormViewSet
+# )
 from .user_views import SignUpView, VerifyEmailView, LoginView, LogoutView
 from .reporting_views import (
     DataImportViewSet, DataExportViewSet, FinancialReportViewSet,
@@ -53,15 +54,15 @@ router.register(r'forex-gains-losses', ForexGainLossViewSet, basename='forex-gai
 router.register(r'bank-api-config', BankAPIConfigurationViewSet, basename='bank-api-config')
 
 # User Management & RBAC endpoints
-router.register(r'users', UserViewSet, basename='user')
-router.register(r'roles', RoleViewSet, basename='role')
-router.register(r'permissions', PermissionViewSet, basename='permission')
-router.register(r'audit-logs', UserAuditLogViewSet, basename='audit-log')
+# router.register(r'users', UserViewSet, basename='user')
+# router.register(r'roles', RoleViewSet, basename='role')
+# router.register(r'permissions', PermissionViewSet, basename='permission')
+# router.register(r'audit-logs', UserAuditLogViewSet, basename='audit-log')
 
 # Custom Fields endpoints
-router.register(r'custom-fields', CustomFieldDefinitionViewSet, basename='custom-field')
-router.register(r'custom-field-values', CustomFieldValueViewSet, basename='custom-field-value')
-router.register(r'custom-forms', CustomFormViewSet, basename='custom-form')
+# router.register(r'custom-fields', CustomFieldDefinitionViewSet, basename='custom-field')
+# router.register(r'custom-field-values', CustomFieldValueViewSet, basename='custom-field-value')
+# router.register(r'custom-forms', CustomFormViewSet, basename='custom-form')
 
 # Import/Export endpoints
 router.register(r'import-jobs', DataImportViewSet, basename='import-job')
@@ -75,10 +76,10 @@ app_name = 'accounting'
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('auth/signup/', SignUpView.as_view()),
-    path('auth/verify/', VerifyEmailView.as_view()),
-    path('auth/login/', LoginView.as_view()),
-    path('auth/logout/', LogoutView.as_view()),
+    # path('auth/signup/', SignUpView.as_view()),
+    # path('auth/verify/', VerifyEmailView.as_view()),
+    # path('auth/login/', LoginView.as_view()),
+    # path('auth/logout/', LogoutView.as_view()),
 ]
 
 
