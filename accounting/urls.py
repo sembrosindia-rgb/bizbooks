@@ -19,11 +19,11 @@ from .views import (
 #     CustomFieldDefinitionViewSet, CustomFieldValueViewSet,
 #     CustomFormViewSet
 # )
-from .user_views import SignUpView, VerifyEmailView, LoginView, LogoutView
-from .reporting_views import (
-    DataImportViewSet, DataExportViewSet, FinancialReportViewSet,
-    DashboardViewSet
-)
+# from .user_views import SignUpView, VerifyEmailView, LoginView, LogoutView
+# from .reporting_views import (
+#     DataImportViewSet, DataExportViewSet, FinancialReportViewSet,
+#     DashboardViewSet
+# )
 
 router = DefaultRouter()
 router.register(r'organizations', OrganizationViewSet)
@@ -65,12 +65,12 @@ router.register(r'bank-api-config', BankAPIConfigurationViewSet, basename='bank-
 # router.register(r'custom-forms', CustomFormViewSet, basename='custom-form')
 
 # Import/Export endpoints
-router.register(r'import-jobs', DataImportViewSet, basename='import-job')
-router.register(r'export-jobs', DataExportViewSet, basename='export-job')
+# router.register(r'import-jobs', DataImportViewSet, basename='import-job')
+# router.register(r'export-jobs', DataExportViewSet, basename='export-job')
 
 # Financial Reporting endpoints
-router.register(r'financial-reports', FinancialReportViewSet, basename='financial-report')
-router.register(r'dashboard', DashboardViewSet, basename='dashboard')
+# router.register(r'financial-reports', FinancialReportViewSet, basename='financial-report')
+# router.register(r'dashboard', DashboardViewSet, basename='dashboard')
 
 app_name = 'accounting'
 
